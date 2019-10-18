@@ -1,0 +1,87 @@
+Neptune (Current build: Alpha v0.5.0 - Next build: Alpha v0.5.1)
+
+Debugging:
+1. Always start the game on Menu as the active scene
+2. For passive testing (no enemies), use Test scene
+
+Addition:
+1. Add rent system for weapons, shield & coin multiplier (Player could use these items/weapons on limited time)
+	- This rent system also includes an icon which shows the current active rented item and rent time (pretty much like Nascar Rumble's pickup status)
+-- Build v0.6.0 --
+2. Add background music
+3. Develop a better pickup spawner script
+-- Build v0.7.0 --
+4. New item: Magnetic coin picker
+5. New type of enemies
+6. Add bonus (sort of rampage) level for every 10 waves passed
+7. On higher wave, add new platforms above the ground for the characters to step onto (also add new enemy spawn point)
+-- Build v0.8.0 --
+8. New sprites (Characters, Props, Background)
+9. Health system for both player and enemies (health bar, health potion, shield health, etc.)
+10. Damage system for both player and enemies (floating damage points, etc.)
+11. New shop item: Health potion (in various amount: +10, +25, +50, +100)
+12. Pickup-based items:
+	i. health (survival only)
+	ii. extra life (story only)
+13. New more complex & deep reward system (?)
+14. Revamp Menu UI to fit all store items
+15. Character customization
+16. Separate shop & character customization menu
+-- Build v0.9.0 --
+
+Mobile playtest fixes:
+1. After long period of gameplay, when coming back to menu, the screen crashes (not sure what triggers this, but suspicion aroused around both multiPrice definition lines in MenuUI script)
+2. Occasionally, the gun shoots itself (Android / Touch input only)
+3. If the player is outside the inner barrier (playerBarrier), the player never dies - Try resetting the character's position where there's no enemy
+4. Occasionally, If the player wearing shield and go to the edge of the screen, the player may thrown outside the inner barrier because of the collision with enemy(s).
+5. If you equip rapid fire and fires it endlessly, sometimes the enemies can ride on top of the rockets avoiding death - Lower spawn point for ground enemies
+6. The inner barrier is still inside the screen space, making the player seem to stuck
+-- Build v0.6.1 --
+
+Editor fixes:
+1. Powerup timer bar still not on the correct amount
+4. Double instantiation of objects (enemies, rockets, etc.)
+5. Enemies just keeps moving until they fell towards the death pit (flip don't work?) - Story only
+2. Occasionally, the shield level won't reduce after hitting an enemy, but the enemy still dies anyway. Giving imbalance advantage to player incidentally.
+-- Build v0.8.0 --
+3. Player's boundaries are visible to screen (Lenovo K5 Vibe Plus, Android, 1920x1080)
+6. Occasionally, after the hero kills an enemy by stomping them, the hero rocketed to the sky (sometimes even get hit / dead)
+-- Build v0.9.0 --
+7. Merge multiple functions (e.g.: BuyBazooka functions) into 1 function.
+8. Make the codes neat (really conserve resources, easy to the eyes, understand every bit of code (or lines of codes), no more disabled scripts using comments (except its might still be useful in the future), also make sure the game runs smoothly on editor (no warnings on console)).
+
+Special Fixes (these only occured while the disabled scripts #2* is disabled) :
+1. Death mechanics not triggered (Survival)
+2. Coin Pickup mechanics now not working (only sound is working but no points added - Story)
+
+Tests:
+1. Make sure coins dropped worth 10 x waveLevel (survival only)
+2. Test whether all pickups were disabled once entered wave break
+3. Test whether some SFX volume level still unbalanced (does coin pickup sound still louder than others?)
+
+Ideas:
+1. 3 difficulty levels:
+	- Novice (Easy): 		Story mode has lives and shield, few enemies, 1 final boss.
+			 		Survival mode has no bosses, normal multiplier, few pickups, few enemies.
+
+	- Intermediate (Medium): 	Story mode has lives, normal enemies, 2 bosses.
+				 	Survival mode has few bosses encounter, +1 from normal multiplier, more pickups, more enemies.
+
+	- Advanced (Hard): 		Story mode has 1 life, tons of enemies, 4 bosses.
+			   		Survival mode has often boss encounters, +2 from normal multiplier, many pickups, many enemies.
+
+2. New way to introduce people into the game (for PC version): Make 2 version of the game, paid version ($5 pricetag?) and free version.
+   Only the free version requires the user to actually contribute to the game via GitHub repo (which later uploaded) in any form of real contribution (no matter how small it is, we even accept ideas)
+
+3. A warning for players to stop the game for a moment and actually do something else if the game has been played for an hour.
+   The game could save all the player's state, and exits the game to give players (forceful?) motivation to actually stop playing the game and do something else while no loss from the player side because all the progress being saved.
+
+4. Sniper bazooka for white bazooka: Shoots 1 all-powerful rocket that could penetrate up to 5 enemies at once in a line. Very slow attack/reload speed, almost instant kill (super high damage)
+5. Heat Seeker for purple bazooka: Shoots 1 guided missile that finds nearest enemy, normal attack speed, normal damage.
+6. The items' initial price is good for now, but once the audience got bigger, the price should be raised accordingly to increase replayability and difficulty
+7. Wider survival ground to play? Or even new scenery/theme?
+8. Add earthquake so some part of the ground could suddenly breaks and fall down (give warning first like flashing)
+9. Add obstacles/enemies from above the ground (e.g.: flying enemies, thunderstorm, meteor shower, etc.)
+
+
+(*) See GM.cs file and search for "Disabled scripts #2" for further details

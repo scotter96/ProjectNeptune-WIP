@@ -1,0 +1,86 @@
+Neptune release notes:
+
+v0.3.0
+Known issues:
+- The wave won't start next time if player gets out of scene while in wavebreak (Survival).
+- Game UIs placed out of screen space on higher resolution (tested on 1920x1080 Android - Lenovo K5 Vibe Plus).
+
+v0.3.1
+Fixes:
+- The wave will start normally even if player gets out of scene while wavebreak (Survival).
+
+v0.3.1.1
+Fixes:
+- Temporarily fixed the position of some UI texts by disabling the white texts and left the shadow texts behind.
+
+Known issues:
+- If the player reaches the edge of playground, and fires triple bazooka while facing the edge, it will repeat firing forever
+
+v0.3.1.2
+Fixes:
+- Fixed an issue where the hero constantly fired the gun upon selection of triple bazooka weapon type
+
+v0.4
+Addition:
+- Added 2 weapon slot inventory system
+- Added pricetag in game scene store
+- Added inventory indicator in menu
+- Added Open/Closed indicator on game scene store
+- Added Pause system and exit prompt upon escaping in the middle of the game
+- Added description for triple bazooka
+
+Fix:
+- Fixed game scene store buttons UI
+
+Known issue:
+- The game normally loads on no weapon equipped on either slot
+
+v0.4.0.1
+Addition:
+- Added description for shield
+
+Fix:
+- Fixed an issue where the game normally loads on no weapon equipped on either slot
+
+Known issue:
+- If the player try to buy a bazooka in menu store, regardless of points' sufficiency to actually purchase the weapon, it will be equipped on the next game session.
+
+v0.4.0.2
+Fix:
+- Fixed an issue where if the player try to buy a bazooka in menu store, regardless of points' sufficiency to actually purchase the weapon, it will be equipped on the next game session.
+
+Known issues:
+- If the player selected a null weapon slot, the gun will be rendered useless but the button and the renderer still active
+- When game over (died) and player backs out to menu immediately, the BackToMenu timer still counting and the game will eventually open the menu scene back
+- After long period of gameplay, when coming back to menu, the screen crashes (not sure what triggers this, need to test more)
+
+v0.4.1
+Addition:
+- Spawn delay on higher level reduced to increase difficulty
+- The ground sprite changed to Unity's ground sprite in 2D platformer package
+- On survival, now spawning randomized powerup pickups every 3 wave or so (randomized)
+- Triple and rapid-fire shooting mechanics has been changed to be able to fire every 2 seconds only after max rockets is reached
+- Spawn delay on higher level reduced to increase difficulty
+
+Fixes:
+- Widen the enemies' above kill collision detector
+- The gun will no longer rendered useless when player selected null weapon slot since it has no effect.
+- The game no longer thrown back to menu if player backs out to menu immediately right after last game's death
+
+v0.4.2
+Fixes:
+- Changed shield mechanics to kill the hitted enemy beside reducing the shield level.
+- Fixed the issue where if the player reaches the edge of playground, and fires triple bazooka while facing the edge, it will repeat firing forever.
+- Fixed triple & rapid-fire bazooka shooting mechanics: Now no matter how many rockets are present in the scene, the player can still shoot new ones.
+- Fixed the shooting delay so that the player cannot "cheat" to skipping the delay by changing weapon anymore.
+
+Known issues:
+- Occasionally, the shield level won't reduce after hitting an enemy, but the enemy still dies anyway. Giving imbalance advantage to player incidentally.
+- Occasionally, after the hero kills an enemy by stomping them, the hero rocketed to the sky (sometimes even get hit / dead).
+- (ANDROID) Occasionally, the gun shoots itself. (Even more often after pressing the fire button)
+
+v0.5.0
+Addition:
+- New pickup: Speed up hero for x seconds
+- New pickup: Slow down enemies for x seconds
+- Added new smoke trails for non-basic rockets

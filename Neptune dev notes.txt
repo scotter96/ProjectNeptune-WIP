@@ -1,0 +1,47 @@
+Neptune version 0.2.0
+
+Summary
+2D action platformer game with Survival and Story mode, available for these platforms:
+	- Android
+	- Windows
+Players can purchase items including weapons, potions, shields to help them along the way.
+Items are purchased using in-game currency (coins), no kind of microtransactions whatsoever.
+Survival mode has unlimited waves for the player to play on, while Story mode offers a different way to play with numbered enemies, pre-made levels, scripted pickups, and a more controlled environment.
+This game currently available for offline single-player only.
+This game will be free?
+
+Features
+- 2 game modes: Survival & Story
+- 4 weapons: Basic, Triple, Rapid-fire, Special
+- Several items (available for purchase): Coin multiplier, Life (story only), Health potion, Shield
+- Health & Damage system
+- 2 weapons slot
+- Shop building available throughout the game on both modes
+- No microtransactions
+
+Genre
+2D, Single-player, action, platformer, survival, story
+
+Development
+- Shop item prices:
+	1. Bazooka lv 1 = FREE
+	2. Bazooka lv 2 = 500
+	3. Bazooka lv 3 = 750
+	4. Triple Bazooka lv 1 = 500
+	5. Triple Bazooka lv 2 = 750
+	6. Triple Bazooka lv 3 = 1500
+	7. Rapid-fire Bazooka lv 1 = 500
+	8. Rapid-fire Bazooka lv 2 = 750
+	9. Rapid-fire Bazooka lv 3 = 1500
+	10. Shield lv 1 = 250
+	11. Shield lv 2 = 500
+	12. Shield lv 3 = 750
+	13. Multi x2 = 250
+	14. Multi x3 = 500
+	15. Multi x4 = 1000
+	16. Multi x5 = 2000
+	17. Multi x6 = 4000
+	18. Multi x7 = 7000
+	19. Multi x8 = 8500
+	20. Multi x9 = 12500
+	21. Multi x10 = 17500
