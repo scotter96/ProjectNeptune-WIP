@@ -19,13 +19,20 @@ public class PickupTrigger : MonoBehaviour {
 	}
 	public IconSprites iconSprites;
 
-	Animator[] statusBarsAnim;
-	
-	float rentTimeForMultiplier, rentTimeForBazooka, rentTimeForShield, rentTimeForSpeed;
+	// Animator[] statusBarsAnim;
+
+	GameObject[] statusBarsGO;
+
+	float rentTimeForMultiplier, rentTimeForBazooka, rentTimeForShield, rentTimeForSpeed, rentTimeForSlow;
+	float defaultRentTimeForMultiplier = 15;
+	float defaultRentTimeForBazooka = 10;
+	float defaultRentTimeForShield = 10;
+	float defaultRentTimeForSpeed = 10;
+	float defaultRentTimeForSlow = 2.5f;
 
 	string lastBazooka;
 
-	bool rent2x, rent4x, rent8x, rentBazooka, rentShield, rentSpeed;
+	bool rent2x, rent4x, rent8x, rentBazooka, rentShield, rentSpeed, rentSlow;
 
 	void Awake () {
 		gm = GameObject.Find ("GM").GetComponent<GM> ();
@@ -64,7 +71,7 @@ public class PickupTrigger : MonoBehaviour {
 			// If this is Coin Multiplier pickup
 			else if (c.gameObject.name.Contains ("Multi")) {
 				Debug.Log ("Before pickup: " + gm.coinMultiplier);
-				rentTimeForMultiplier = 15;
+				rentTimeForMultiplier = defaultRentTimeForMultiplier;
 
 				if (c.gameObject.name.Contains ("2")) {
 					gm.coinMultiplier *= 2;
@@ -122,7 +129,7 @@ public class PickupTrigger : MonoBehaviour {
 					lastBazooka = gun.equipped;
 				
 				rentBazooka = true;
-				rentTimeForBazooka = 10;
+				rentTimeForBazooka = defaultRentTimeForBazooka;
 
 				if (c.gameObject.name.Contains ("Rapid-fire")) {					
 					gun.ChangeWeapon ("Rapid-fire");
@@ -163,7 +170,7 @@ public class PickupTrigger : MonoBehaviour {
 
 				// Disabled scripts #6: Scripts to rent (not permanently bought) shield for 10 seconds
 				rentShield = true;
-				rentTimeForShield = 10;
+				rentTimeForShield = defaultRentTimeForShield;
 				shield = GameObject.FindWithTag ("Shield").GetComponent<Shield> ();
 
 				DestroyExistingPowerupIcon ("Shield");
@@ -179,7 +186,7 @@ public class PickupTrigger : MonoBehaviour {
 				if (!rentSpeed)
 					rentSpeed = true;
 				
-				rentTimeForSpeed = 10;
+				rentTimeForSpeed = defaultRentTimeForSpeed;
 				Time.timeScale = 2;
 
 				DestroyExistingPowerupIcon ("Speed");
@@ -192,10 +199,10 @@ public class PickupTrigger : MonoBehaviour {
 			else if (c.gameObject.name.Contains ("Slow")) {
 				Debug.Log ("Before pickup: " + Time.timeScale + "x speed");
 
-				if (!rentSpeed)
-					rentSpeed = true;
+				if (!rentSlow)
+					rentSlow = true;
 				
-				rentTimeForSpeed = 2.5f;
+				rentTimeForSlow = defaultRentTimeForSlow;
 				Time.timeScale = 0.5f;
 
 				DestroyExistingPowerupIcon ("Slow");
@@ -271,7 +278,46 @@ public class PickupTrigger : MonoBehaviour {
 
 	void UpdateStatusBars ()
 	{
-		statusBarsAnim = activePowerups.GetComponentsInChildren<Animator>();
+		// statusBarsAnim = activePowerups.GetComponentsInChildren<Animator>();
+		statusBarsGO = GameObject.FindGameObjectsWithTag("StatusBar");
+		foreach (GameObject go in statusBarsGO)
+		{
+			if (go.transform.parent.name.Contains ("2x") ||
+				go.transform.parent.name.Contains ("4x") ||
+				go.transform.parent.name.Contains ("8x"))
+			{
+				RectTransform statusBar = go.transform as RectTransform;
+				float value = rentTimeForMultiplier/defaultRentTimeForMultiplier;
+				statusBar.localScale = new Vector2(value, 1);
+			}
+			else if (go.transform.parent.name.Contains ("Rapid") ||
+				go.transform.parent.name.Contains ("Special") ||
+				go.transform.parent.name.Contains ("Triple") ||
+				go.transform.parent.name.Contains ("Sniper"))
+			{
+				RectTransform statusBar = go.transform as RectTransform;
+				float value = rentTimeForBazooka/defaultRentTimeForBazooka;
+				statusBar.localScale = new Vector2(value, 1);
+			}
+			else if (go.transform.parent.name.Contains ("Shield"))
+			{
+				RectTransform statusBar = go.transform as RectTransform;
+				float value = rentTimeForShield/defaultRentTimeForShield;
+				statusBar.localScale = new Vector2(value, 1);
+			}
+			else if (go.transform.parent.name.Contains ("Speed"))
+			{
+				RectTransform statusBar = go.transform as RectTransform;
+				float value = rentTimeForSpeed/defaultRentTimeForSpeed;
+				statusBar.localScale = new Vector2(value, 1);
+			}
+			else if (go.transform.parent.name.Contains ("Slow"))
+			{
+				RectTransform statusBar = go.transform as RectTransform;
+				float value = rentTimeForSlow/defaultRentTimeForSlow;
+				statusBar.localScale = new Vector2(value, 1);
+			}
+		}
 	}
 
 	void Update ()
@@ -347,7 +393,10 @@ public class PickupTrigger : MonoBehaviour {
 
 		// Disabled scripts #6: Once shield rent time is up
 		if (rentTimeForShield > 0)
+		{
 			rentTimeForShield -= Time.deltaTime;
+			UpdateStatusBars ();
+		}
 			
 		else if (rentTimeForShield <= 0 && rentShield) {
 			shield.ReduceShield ();
@@ -374,6 +423,21 @@ public class PickupTrigger : MonoBehaviour {
 			UpdateStatusBars ();
 		}
 
+		if (rentTimeForSlow > 0)
+		{
+			rentTimeForSlow -= Time.deltaTime;
+			UpdateStatusBars ();
+		}
+		else if (rentTimeForSlow <= 0 && rentSlow) {
+			rentSlow = false;
+			rentTimeForSlow = 0;
+			Time.timeScale = 1;
+
+			DestroyExistingPowerupIcon ("Speed");
+			DestroyExistingPowerupIcon ("Slow");
+			UpdateStatusBars ();
+		}
+
 		if (gm.isWaveBreak) {
 			if (rent2x || rent4x || rent8x || rentBazooka) {
 				rentTimeForMultiplier = 0;
@@ -389,7 +453,7 @@ public class PickupTrigger : MonoBehaviour {
 				DestroyExistingPowerupIcon ("2x");
 				DestroyExistingPowerupIcon ("4x");
 				DestroyExistingPowerupIcon ("8x");
-				UpdateStatusBars ();				
+				UpdateStatusBars ();
 			}
 		}
 	}
