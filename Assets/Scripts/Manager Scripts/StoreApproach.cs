@@ -25,7 +25,7 @@ public class StoreApproach : MonoBehaviour
 
 		for (int i = 0; i < childButtons.Length; i++) {
 			RectTransform childI = childButtons [i].gameObject.GetComponent<RectTransform> ();
-			childI.sizeDelta = new Vector2 (shopRT.sizeDelta.x * 0.325f, shopRT.sizeDelta.y * 0.34f);
+			childI.sizeDelta = new Vector2 (shopRT.sizeDelta.x * 0.24375f, shopRT.sizeDelta.y * 0.289f);
 
 			if (i < 2) {
 				for (int j = i; j < 2; j++) {

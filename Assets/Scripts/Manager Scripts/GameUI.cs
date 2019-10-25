@@ -44,11 +44,11 @@ public class GameUI : MonoBehaviour {
 		float defaultYPos = SDy / 2;
 
 		// SHOP POPUP PANEL SETTINGS
-		shopPopup.sizeDelta = new Vector2 (Screen.width * 0.4f, Screen.height * 0.4f);		
+		shopPopup.sizeDelta = new Vector2 (Screen.width * 0.7f, Screen.height * 0.6f);		
 		// END OF SHOP POPUP PANEL SETTINGS
 
 		// SCROLLABLE PANEL SETTINGS
-		int leftPadding = Mathf.RoundToInt (shopPopup.sizeDelta.x / 8);
+		int leftPadding = Mathf.RoundToInt (shopPopup.sizeDelta.x * 0.203f);
 		int topPadding = Mathf.RoundToInt (shopPopup.sizeDelta.y / 10);
 		int bottomPadding = Mathf.RoundToInt (shopPopup.sizeDelta.y * 0.225f);
 		int horizontalSpacing = Mathf.RoundToInt ((shopPopup.sizeDelta.x * 0.325f) / 4);
@@ -57,14 +57,18 @@ public class GameUI : MonoBehaviour {
 		HorizontalLayoutGroup[] shopHorizontals = shopPopup.GetComponentsInChildren<HorizontalLayoutGroup>();
 		foreach (HorizontalLayoutGroup horizontal in shopHorizontals)
 		{
-			horizontal.padding.left = leftPadding;
+			// horizontal.padding.left = leftPadding;
 			horizontal.spacing = horizontalSpacing;
 		}
 
 		VerticalLayoutGroup shopVertical = shopPopup.GetComponentInChildren<VerticalLayoutGroup>();
 		shopVertical.padding.top = topPadding;
 		shopVertical.padding.bottom = bottomPadding;
+		shopVertical.padding.left = leftPadding;
 		shopVertical.spacing = verticalSpacing;
+		
+		RectTransform shopVRT = shopVertical.GetComponent<RectTransform>();
+		shopVRT.anchoredPosition = new Vector2 (0, -shopPopup.sizeDelta.y/4);
 		// END OF SCROLLABLE PANEL SETTINGS
 
 		weaponPanel.sizeDelta = new Vector2 (Screen.width * 0.3f, SDy);
