@@ -483,6 +483,9 @@ MonoBehaviour:
   waveTimer: {fileID: 503799902}
   weaponPanel: {fileID: 897453290}
   shopPopup: {fileID: 136293507}
+  playerTF: {fileID: 2124547692}
+  playerBarrierLeft: {fileID: 2096119705}
+  playerBarrierRight: {fileID: 1060559160}
 --- !u!114 &98399764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7425,6 +7428,7 @@ GameObject:
   - component: {fileID: 1713620613}
   - component: {fileID: 1713620615}
   - component: {fileID: 1713620614}
+  - component: {fileID: 1713620616}
   m_Layer: 5
   m_Name: WaveShadow
   m_TagString: Untagged
@@ -7494,6 +7498,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713620612}
   m_CullTransparentMesh: 0
+--- !u!114 &1713620616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713620612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 98399763}
+          m_MethodName: SkipLevel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &1817547873
 GameObject:
   m_ObjectHideFlags: 0
@@ -9044,6 +9078,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4edb294ea6f9a34ca86a24c8b16c2c3, type: 3}
+--- !u!4 &2124547692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 422858, guid: d4edb294ea6f9a34ca86a24c8b16c2c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2124547691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2124547693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 146328, guid: d4edb294ea6f9a34ca86a24c8b16c2c3,

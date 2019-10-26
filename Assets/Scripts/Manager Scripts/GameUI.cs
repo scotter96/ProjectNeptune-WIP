@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour {
 
@@ -21,6 +18,10 @@ public class GameUI : MonoBehaviour {
 
 	public RectTransform weaponPanel, shopPopup;
 
+	public Transform playerTF, playerBarrierLeft, playerBarrierRight;
+
+	float playerAreaLeft, playerAreaRight;
+
 	bool WB_Popup;
 
 	Rigidbody2D playerRB;
@@ -34,6 +35,9 @@ public class GameUI : MonoBehaviour {
 
 		if (gameManager == null)
 			gameManager = GameObject.Find ("GM").GetComponent<GM> ();
+
+		playerAreaLeft = playerBarrierLeft.position.x - 1;
+		playerAreaRight = playerBarrierRight.position.x + 1;
 
 		// To make sure if this is survival mode, the starting wave is 0
 		gameManager.wave = 0;
@@ -140,8 +144,23 @@ public class GameUI : MonoBehaviour {
 		*/
 	}
 
+	public void SkipLevel()
+	{
+		WB_Popup = !WB_Popup;
+	}
+	
+	void RepositionPlayer (bool reset)
+	{
+		playerRB.velocity = new Vector2(0,0);
+		if (reset)
+			playerTF.position = new Vector3(0,4,-1);
+	}
+
 	void Update()
 	{
+		if (!gameManager.dead && (playerTF.position.x < playerAreaLeft || playerTF.position.x > playerAreaRight))
+			RepositionPlayer (true);
+
 		if (playerRB == null && !gameManager.dead)
 			playerRB = GameObject.FindWithTag ("Player").GetComponent<Rigidbody2D> ();
 
