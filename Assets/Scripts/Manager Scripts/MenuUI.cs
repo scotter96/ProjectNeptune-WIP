@@ -56,6 +56,7 @@ public class MenuUI : MonoBehaviour {
 
 		gm = GameObject.Find ("GM").GetComponent<GM> ();
 		DontDestroyOnLoad (gm);
+		gm.CoinCheck();
 
 		stateManager = GameObject.Find ("GM").GetComponent<StateManager> ();
 

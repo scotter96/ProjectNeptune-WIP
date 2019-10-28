@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GM : MonoBehaviour {
 
 	public int lives = 3;
-	public int points = 0;
 	public int bazookaLevel = 1;
 	public int RFBazookaLevel = 0;
 	public int TRBazookaLevel = 0;
@@ -16,6 +15,8 @@ public class GM : MonoBehaviour {
 	public int coinValue = 10;
 	public int wave = 0;
 	public int highScore = 0;
+
+	public float points = 0;
 
 	public string equippedBazookaInGunScript = null;
 	public string slot1, slot2;
@@ -76,8 +77,7 @@ public class GM : MonoBehaviour {
 		enemySpawning = true;
 		dead = false;
 
-		if (coinMultiplier < 1)
-			coinMultiplier = 1;
+		coinMultiplier = 1;
 
 		if (SceneManager.GetActiveScene().name != "Menu") {
 			if (SceneManager.GetActiveScene().name != "Survival" && SceneManager.GetActiveScene().name != "Test") {
@@ -105,6 +105,14 @@ public class GM : MonoBehaviour {
 		}
 	}
 
+	public void CoinCheck()
+	{
+		if (points < 0)
+			points = 0;
+		else if (points > 9999999)
+			points = 9999999;
+	}
+
 	void Update () {
 		// cheats (only usable during development)		
 #if UNITY_EDITOR
@@ -130,7 +138,10 @@ public class GM : MonoBehaviour {
 				coinMultiplier += 1;
 		}
 		else if (Input.GetKeyUp (KeyCode.Comma))
-			Debug.Log (coinMultiplier);
+		{
+			points += shieldPrices[shieldLevel];
+			BuyShield();
+		}
 		else if (Input.GetKeyUp (KeyCode.Space))
 		{
 			if (SceneManager.GetActiveScene().name == "Menu")
@@ -195,6 +206,7 @@ public class GM : MonoBehaviour {
 
 	void WaveBreak ()
 	{
+		CoinCheck();
 		enemySpawning = false;
 		isWaveBreak = true;
 		gameUI.WaveBreakPopup ();
@@ -270,13 +282,15 @@ public class GM : MonoBehaviour {
 	public void AddPoint()
 	{
 		gameAudioManager.PlayOneShot (scoreClip, 1);
-		points += coinValue * coinMultiplier;
+		if (points < 9999999)
+			points += coinValue * coinMultiplier;
+		CoinCheck();
 	}
 
 	public void UpdatePoint ()
 	{
-		pointtxt.text = points + "";
-		pointshtxt.text = points + "";
+		pointtxt.text = points.ToString("0") + "";
+		pointshtxt.text = points.ToString("0") + "";
 	}
 
 	void GameOverCheck ()

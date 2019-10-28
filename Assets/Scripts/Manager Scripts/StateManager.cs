@@ -11,7 +11,8 @@ public class StateManager : MonoBehaviour {
 	Text notifier;
 	GM gm;
 
-	public int points;
+	public float points;
+
 	public int bazookaLevel;
 	public int TRBazookaLevel;
 	public int RFBazookaLevel;
@@ -26,7 +27,8 @@ public class StateManager : MonoBehaviour {
 	string lastEquippedWeapon;
 	string lastSlot1, lastSlot2;
 
-	int lastPoints;
+	float lastPoints;
+
 	int lastBazookaLevel;
 	int lastTRBazookaLevel;
 	int lastRFBazookaLevel;
@@ -287,7 +289,8 @@ public class StateManager : MonoBehaviour {
 [Serializable]
 class SaveData
 {
-	public int points;
+	public float points;
+	
 	public int bazookaLevel;
 	public int TRBazookaLevel;
 	public int RFBazookaLevel;
