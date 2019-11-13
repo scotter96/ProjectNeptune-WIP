@@ -36,6 +36,7 @@ public class GM : MonoBehaviour {
 	public bool dead;
 	public bool enemySpawning;
 	public bool isWaveBreak;
+	public bool isRentingBazooka;
 	bool ResetOnDemand;
 	bool sceneChangeScan;
 

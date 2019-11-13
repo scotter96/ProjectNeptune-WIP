@@ -12,10 +12,15 @@ public class CoinPickup : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.gameObject.CompareTag ("Player")) {
-			Destroy (gameObject);
-			GC.AddPoint ();
-			GC.UpdatePoint();
+			HitPlayer();
 		}
+	}
+
+	public void HitPlayer ()
+	{
+		Destroy (gameObject);
+		GC.AddPoint ();
+		GC.UpdatePoint();
 	}
 
 	void OnCollisionEnter2D (Collision2D other)

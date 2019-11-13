@@ -116,6 +116,12 @@ public class Inventory : MonoBehaviour {
 
 	public void EquipToSlot (int slot)
 	{
+		if (gm.isRentingBazooka)
+		{
+			PickupTrigger pickupScript = GameObject.FindWithTag ("Player").GetComponent<PickupTrigger>();
+			pickupScript.CancelRent("Bazooka");
+		}
+		
 		if (slot == 1) {
 			if (gm.slot2 != gm.equippedBazookaInGunScript) {
 				gm.slot1 = gm.equippedBazookaInGunScript;

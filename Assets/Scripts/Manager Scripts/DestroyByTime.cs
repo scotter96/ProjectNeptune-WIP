@@ -5,8 +5,10 @@ public class DestroyByTime : MonoBehaviour {
 
 	public float time;
 	public GameObject coinPrefab;
+	Transform leftBlocker, rightBlocker;
 	GameObject theCoin;
 	int coinCounts;
+	float leftBlockerX, rightBlockerX;
 	GM GC;
 
 	// Use this for initialization
@@ -14,6 +16,10 @@ public class DestroyByTime : MonoBehaviour {
 		GC = GameObject.Find ("GM").GetComponent<GM> ();
 		Destroy (gameObject, time);
 		coinCounts = GC.coinMultiplier;
+		leftBlocker = GameObject.Find("Player_Left").transform;
+		rightBlocker = GameObject.Find("Player_Right").transform;
+		leftBlockerX = leftBlocker.position.x;
+		rightBlockerX = rightBlocker.position.x;
 		StartCoroutine (SpawnCoin ());
 	}
 
@@ -28,6 +34,9 @@ public class DestroyByTime : MonoBehaviour {
 			yield return new WaitForSeconds (0.1f);
 			if (theCoin.GetComponent<CoinDestroyByTime>().destroyed == false)
 				theCoin.GetComponent<CircleCollider2D> ().isTrigger = false;
+			float coinX = theCoin.transform.position.x;
+			if (coinX <= leftBlockerX || coinX >= rightBlockerX)
+				theCoin.GetComponent<CoinPickup>().HitPlayer();
 		}
 	}
 }

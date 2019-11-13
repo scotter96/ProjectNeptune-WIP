@@ -130,6 +130,7 @@ public class PickupTrigger : MonoBehaviour {
 				
 				rentBazooka = true;
 				rentTimeForBazooka = defaultRentTimeForBazooka;
+				gm.isRentingBazooka = true;
 
 				if (c.gameObject.name.Contains ("Rapid-fire")) {					
 					gun.ChangeWeapon ("Rapid-fire");
@@ -382,6 +383,7 @@ public class PickupTrigger : MonoBehaviour {
 			gun.ChangeWeapon (lastBazooka);
 			rentBazooka = false;
 			rentTimeForBazooka = 0;
+			gm.isRentingBazooka = false;
 
 			DestroyExistingPowerupIcon ("Rapid");
 			DestroyExistingPowerupIcon ("Triple");
@@ -456,5 +458,11 @@ public class PickupTrigger : MonoBehaviour {
 				UpdateStatusBars ();
 			}
 		}
+	}
+
+	public void CancelRent (string name)
+	{
+		if (name == "Bazooka")
+			rentTimeForBazooka = 0;
 	}
 }
