@@ -2170,7 +2170,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 136293508}
-        m_MethodName: OnTRBazookaPressed
+        m_MethodName: OnSNBazookaPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

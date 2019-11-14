@@ -115,13 +115,7 @@ public class Inventory : MonoBehaviour {
 	}
 
 	public void EquipToSlot (int slot)
-	{
-		if (gm.isRentingBazooka)
-		{
-			PickupTrigger pickupScript = GameObject.FindWithTag ("Player").GetComponent<PickupTrigger>();
-			pickupScript.CancelRent("Bazooka");
-		}
-		
+	{		
 		if (slot == 1) {
 			if (gm.slot2 != gm.equippedBazookaInGunScript) {
 				gm.slot1 = gm.equippedBazookaInGunScript;
@@ -144,6 +138,12 @@ public class Inventory : MonoBehaviour {
 
 	public void EquipFromSlot (int slot)
 	{
+		if (gm.isRentingBazooka)
+		{
+			PickupTrigger pickupScript = GameObject.FindWithTag ("Player").GetComponent<PickupTrigger>();
+			pickupScript.CancelRent("Bazooka");
+		}
+
 		if (slot == 1 && gm.slot1 != null)
 			gun.ChangeWeapon (gm.slot1);
 		else if (slot == 2 && gm.slot2 != null)
